@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 15;
+use Test::More tests => 29;
 use Test::NoWarnings;
 
 use Test::Benchmark;
@@ -10,30 +10,79 @@ use Test::Tester;
 
 Test::Benchmark::builder(Test::Tester::capture());
 
-
 my $fac30 = sub {fac(30)};
 my $fac20 = sub {fac(20)};
 my $fac10 = sub {fac(10)};
 
 check_test(
 	sub {
-		is_faster(-1, $fac10, $fac20, "10 faster than 20");
+		is_fastest("fac10", -1,
+			{
+				fac10 => $fac10,
+				fac20 => $fac20,
+				fac30 => $fac30,
+			},
+			"fac10 fastest",
+		);
 	},
 	{
 		actual_ok => 1,
 		diag => "",
-		name => "10 faster than 20",
+		name => "fac10 fastest",
 	},
-	"10 faster than 20"
+	"fac10 fastest"
 );
 
 check_test(
 	sub {
-		is_faster(-1, $fac20, $fac10, "20 faster than 10");
+		is_fastest("fac30", -1,
+			{
+				fac10 => $fac10,
+				fac20 => $fac20,
+				fac30 => $fac30,
+			},
+			"fac30 fastest",
+		);
 	},
 	{
 		actual_ok => 0,
 	},
+	"fac30 not fastest"
+);
+
+check_tests(
+	sub {
+		is_faster(-1, $fac10, $fac20, "10 faster than 20 time");
+		is_faster(1000, $fac10, $fac20, "10 faster than 20 num");
+	},
+	[
+		{
+			actual_ok => 1,
+			diag => "",
+			name => "10 faster than 20 time",
+		},
+		{
+			actual_ok => 1,
+			diag => "",
+			name => "10 faster than 20 num",
+		},
+	],
+	"10 faster than 20"
+);
+
+check_tests(
+	sub {
+		is_faster(-1, $fac20, $fac10, "20 faster than 10 time");
+		is_faster(1000, $fac20, $fac10, "20 faster than 10 num");
+	},
+	[
+		{
+			actual_ok => 0,
+		},
+		{
+			actual_ok => 0,
+		},
+	],
 	"20 slower than 10"
 );
 
