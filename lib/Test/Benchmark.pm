@@ -15,7 +15,7 @@ use vars qw(
 	$VERSION @EXPORT @ISA @CARP_NOT $VERBOSE
 );
 
-$VERSION = "0.002";
+$VERSION = "0.003";
 $VERBOSE = 0;
 
 my $Test = Test::Builder->new;

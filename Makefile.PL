@@ -24,6 +24,7 @@ WriteMakefile(
 		Benchmark => 1,
 		'Test::Builder' => 0,
 		'Test::Tester' => 0,
+		'Test::NoWarnings' => 0,
 	},
 	dist => {
 		PREOP=> "rm -f README; pod2text -80 < $doc_file > README; cp -f README $dir-\$(VERSION); "

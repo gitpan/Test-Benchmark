@@ -1,3 +1,7 @@
+0.003
+
+Added dependency on Test::NoWarningss
+
 0.002
 
 Fixed the comparison, got confused with all n/u/s and 1/2, effectively I was
