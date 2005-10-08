@@ -1,12 +1,12 @@
 use strict;
 use warnings;
 
-use Test::More tests => 29;
+use Test::Tester;
+
+use Test::More tests => 36;
 use Test::NoWarnings;
 
 use Test::Benchmark;
-
-use Test::Tester;
 
 Test::Benchmark::builder(Test::Tester::capture());
 

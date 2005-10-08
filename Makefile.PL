@@ -23,7 +23,7 @@ WriteMakefile(
 	PREREQ_PM => {
 		Benchmark => 1,
 		'Test::Builder' => 0,
-		'Test::Tester' => 0,
+		'Test::Tester' => 0.103,
 		'Test::NoWarnings' => 0,
 	},
 	dist => {

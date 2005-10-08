@@ -15,7 +15,7 @@ use vars qw(
 	$VERSION @EXPORT @ISA @CARP_NOT $VERBOSE
 );
 
-$VERSION = "0.003";
+$VERSION = "0.004";
 $VERBOSE = 0;
 
 my $Test = Test::Builder->new;
@@ -73,6 +73,7 @@ sub is_fastest
 
 sub is_faster
 {
+	local $Test::Builder::Level = $Test::Builder::Level + 1;
 	if (ref $_[1])
 	{
 		is_n_times_faster(1, @_);
